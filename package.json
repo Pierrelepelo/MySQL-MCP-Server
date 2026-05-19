@@ -1,0 +1,30 @@
+{
+  "name": "mysql-mcp-server",
+  "version": "0.1.0",
+  "description": "AI-safe MySQL/MariaDB MCP server with schema intelligence",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "start": "node dist/index.js"
+  },
+  "keywords": ["mcp", "mysql", "mariadb", "database", "ai"],
+  "author": "DEPSE Development",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "mysql2": "^3.11.0",
+    "node-sql-parser": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
