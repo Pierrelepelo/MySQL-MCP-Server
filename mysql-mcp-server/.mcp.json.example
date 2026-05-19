@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "mysql": {
+      "command": "node",
+      "args": ["C:\\wamp64\\www\\depse2019\\mysql-mcp-server\\dist\\index.js"],
+      "env": {
+        "MYSQL_HOST": "localhost",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USER": "root",
+        "MYSQL_PASSWORD": "",
+        "MYSQL_DATABASE": "depse2019",
+        "MYSQL_PROFILE": "balanced"
+      }
+    }
+  }
+}
