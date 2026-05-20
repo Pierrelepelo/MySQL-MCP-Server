@@ -2,20 +2,18 @@
 
 Ce guide explique comment utiliser le MySQL MCP Server dans n'importe quel projet sur votre machine.
 
-## Option 1: Utilisation via le dépôt local (Recommandé)
+## 🎯 Comment ça marche ?
 
-Le serveur MCP est déjà configuré pour le projet DEPSE dans `.mcp.json`. Pour l'utiliser dans d'autres projets:
+**Claude Code détecte AUTOMATIQUEMENT** les fichiers `.mcp.json` dans vos projets.
+- **Pas besoin** de dire à Claude "utilise le MCP"
+- **Pas besoin** de configurer quoi que ce soit
+- Juste ouvrez un projet avec un `.mcp.json` et les outils sont disponibles immédiatement
 
-### Méthode A: Créer un lien symbolique
+## 📝 Utilisation pour un Nouveau Projet
 
-```bash
-# Créer un lien symbolique vers le serveur MCP
-mklink /D "C:\wamp64\www\depse2019\.mcp.json" "%USERPROFILE%\.claude\mcp.json"
-```
+**C'est tout simple !** Ajoutez juste ce fichier à la racine de votre projet:
 
-### Méthode B: Ajouter la configuration à chaque projet
-
-Ajoutez ce contenu au fichier `.mcp.json` à la racine de chaque projet:
+**Fichier: `.mcp.json`**
 
 ```json
 {
@@ -36,46 +34,26 @@ Ajoutez ce contenu au fichier `.mcp.json` à la racine de chaque projet:
 }
 ```
 
-## Option 2: Installation Globale via npm (Futur)
+**C'est tout !** Dès que vous rouvrez votre projet dans Claude Code, le MCP sera automatiquement disponible.
 
-Pour rendre le MCP disponible globalement:
+## ⚠️ Important
 
-```bash
-cd C:\wamp64\www\depse2019
-npm link
-```
+- **NE Créez PAS de lien symbolique** vers `.mcp.json` (cela casserait votre config personnelle)
+- **Chaque projet** qui veut utiliser le MCP doit avoir son propre `.mcp.json`
+- **WAMP/MariaDB doit être actif** sur votre machine pour que le MCP fonctionne
 
-Puis dans chaque projet, ajoutez au `.mcp.json`:
+## ✅ Vérification
 
-```json
-{
-  "mcpServers": {
-    "mysql-depse": {
-      "command": "mysql-mcp-server",
-      "env": {
-        "MYSQL_HOST": "localhost",
-        "MYSQL_PORT": "3306",
-        "MYSQL_USER": "root",
-        "MYSQL_PASSWORD": "",
-        "MYSQL_DATABASE": "depse2019",
-        "MYSQL_PROFILE": "balanced"
-      }
-    }
-  }
-}
-```
-
-## Vérification
-
-Pour vérifier que le MCP est accessible:
+Pour vérifier que ça marche:
 
 1. Ouvrez Claude Code
-2. Ouvrez n'importe quel projet
-3. Tapez: "Liste les bases de données" ou "Liste les tables de depse2019"
+2. Ouvrez n'importe quel projet (ou créez un nouveau projet vide)
+3. Ajoutez le fichier `.mcp.json` ci-dessus
+4. Tapez: "Liste les tables de depse2019"
 
-Le MCP devrait répondre avec les informations de votre base de données.
+Claude devrait automatiquement utiliser le MCP et répondre avec la liste de vos tables ! 🎉
 
-## Outils Disponibles
+## 🛠️ Outils Disponibles
 
 **Discovery Tools:**
 - `list_databases` - Lister les bases de données accessibles
@@ -90,20 +68,22 @@ Le MCP devrait répondre avec les informations de votre base de données.
 - `validate_query` - Valider sans exécuter
 - `execute_select` - Exécuter SELECT avec protections
 
-## Exemples d'Utilisation
+## 💡 Exemples d'Utilisation
 
 ```
 # Dans Claude Code, avec n'importe quel projet ouvert:
 
 "Montre-moi toutes les tables de la base depse2019"
-→ Appelle list_tables
+→ Claude utilise automatiquement list_tables
 
 "Trouve les tables qui contiennent 'naissance'"
-→ Appelle search_schema("naissance")
+→ Claude utilise automatiquement search_schema("naissance")
 
 "Quelle est la structure de la table depse_log_localite ?"
-→ Appelle describe_table("depse_log_localite")
+→ Claude utilise automatiquement describe_table("depse_log_localite")
 
 "Exécute: SELECT COUNT(*) FROM depse_log_localite WHERE valide = 1"
-→ Valide et exécute la requête
+→ Claude valide et exécute la requête en toute sécurité
 ```
+
+**Rappel:** Vous n'avez pas besoin de mentionner "utilise le MCP" ou "appelle l'outil" - Claude sait automatiquement quand et comment l'utiliser !
