@@ -4,12 +4,16 @@
   "description": "AI-safe MySQL/MariaDB MCP server with schema intelligence",
   "main": "dist/index.js",
   "type": "module",
+  "bin": {
+    "mysql-mcp-server": "./dist/index.js"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
     "test": "vitest",
     "test:run": "vitest run",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "start:dev": "tsx src/index.ts"
   },
   "keywords": ["mcp", "mysql", "mariadb", "database", "ai"],
   "author": "DEPSE Development",

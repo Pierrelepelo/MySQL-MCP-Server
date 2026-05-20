@@ -60,10 +60,7 @@ export class ResultFormatter {
 
     // Handle numbers
     if (typeof value === 'number') {
-      // Check if it looks like a decimal that should be preserved
-      if (!Number.isInteger(value)) {
-        return value.toString() // Preserve as string to avoid precision loss
-      }
+      // Keep numbers as-is for proper numeric handling
       return value
     }
 
@@ -88,7 +85,10 @@ export class ResultFormatter {
       return str
     }
 
-    return `${str.substring(0, this.maxFieldLength)}... (truncated, was ${str.length} chars)`
+    const suffix = `... (truncated, was ${str.length} chars)`
+    const maxContentLength = this.maxFieldLength - suffix.length
+
+    return `${str.substring(0, maxContentLength)}${suffix}`
   }
 
   private detectMimeType(buffer: Buffer): string {

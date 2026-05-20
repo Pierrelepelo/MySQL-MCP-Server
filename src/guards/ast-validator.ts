@@ -1,4 +1,4 @@
-import { Parser } from 'node-sql-parser'
+import { Parser as SQLParser } from 'node-sql-parser'
 import type { ValidationResult } from '../types/index.js'
 
 /**
@@ -18,11 +18,11 @@ export interface ValidationOptions {
  * allowing detection of injection attempts, unsafe operations, and automatic query rewriting.
  */
 export class AstValidator {
-  private parser: Parser
+  private parser: SQLParser
   private options: Required<ValidationOptions>
 
   constructor(options: ValidationOptions = {}) {
-    this.parser = new Parser()
+    this.parser = new SQLParser()
     this.options = {
       maxLimit: options.maxLimit ?? 1000,
       allowMultipleStatements: options.allowMultipleStatements ?? false
